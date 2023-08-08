@@ -1,0 +1,172 @@
+-> MySQL is a very popular open-source relational database management system (RDBMS).
+-> RDBMS stands for Relational Database Management System. RDBMS is a program used to maintain a relational database.
+RDBMS is the basis for all modern database systems such as MySQL, Microsoft SQL Server, Oracle, and Microsoft Access.
+RDBMS uses SQL queries to access the data in the database.
+
+A relational database defines database relationships in the form of tables. The tables are related to each other - based on data common to each.
+
+-> SQL
+SQL is the standard language for dealing with Relational Databases. SQL is used to insert, search, update, and delete database records.
+The following SQL statement selects all the records in the "Customers" table:
+SELECT * FROM Customers;
+
+NOTE: SQL keywords are NOT case sensitive: select is the same as SELECT
+
+-> Some of The Most Important SQL Commands :
+SELECT - extracts data from a database
+UPDATE - updates data in a database
+DELETE - deletes data from a database
+INSERT INTO - inserts new data into a database
+CREATE DATABASE - creates a new database
+ALTER DATABASE - modifies a database
+CREATE TABLE - creates a new table
+ALTER TABLE - modifies a table
+DROP TABLE - deletes a table
+CREATE INDEX - creates an index (search key)
+DROP INDEX - deletes an index
+
+-> SELECT Statement
+The SELECT statement is used to select data from a database. The data returned is stored in a result table, called the result-set.
+SELECT column1, column2 FROM table_name;
+Here, column1, column2 are the field names of the table you want to select data from. 
+If you want to select all the fields available in the table, use the following syntax:
+SELECT * FROM table_name;
+
+
+-> CODE PART (MYSQL BUILT-IN FUNCTIONS):
+NOTE: select * means display all the rows in the given table
+
+show databases;    -- shows all databases present 
+use mysql;         -- tells to use mysql database  
+show tables;       -- shows all tables present in mysql database  
+select * from db;  -- gives all rows present in table db
+describe db;      -- gives structure of table db 
+create database sql_intro;        -- creating database 
+show databases;
+-- use sql_intro;
+show databases;
+-- creating table emp_details (Name is column name, varchar is datatype holding max value/characters 25
+-- Age is column of type int, sex is column name of type char having 1 value,male/female
+-- doj i.e. date of join of type date, city of varchar type max value 15 
+create table emp_details (Name varchar(25),Age int, sex char(1),
+doj date, city varchar(15),salary float);
+describe emp_details;      -- shows us our table 
+
+-- INSERT Command
+insert into emp_details
+values("Jimmy",35,"M","2005-05-30","Chicago",70000),
+("Shane",30,"M","1999-06-25","Seattle",55000),
+("Marry",28,"F","2009-03-10","Boston",62000),
+("Dwayne",37,"M","2011-07-12","Austin",57000),
+("Sara",32,"F","2017-10-27","New York",72000),
+("Ammy",35,"F","2014-12-20","Seattle",80000);
+
+select * from emp_details;    -- to get all table details 
+-- table column city has 2 times Seattle, if we want only unique values
+select distinct city from emp_details;    -- gives only unique values from city column
+
+-- to count number of employees in the table
+-- select count(name) from emp_details;
+-- to get in a good format (alias name)
+select count(name) as count_name from emp_details; 
+
+select sum(salary) from emp_details;    -- to get sum of all salaries,sum is in-built
+
+select avg(salary) from emp_details;   -- to get avg of all salaries
+
+select name,age,city from emp_details;  -- shows only name,age,city column
+
+-- sql has where clause to filter rows based on condition (to get employees with age>30)
+select * from emp_details where age > 30;
+select * from emp_details where sex = "F";
+-- and (checks for both conditions)
+select * from emp_details where age > 30 and sex="F";
+
+-- or operator
+select * from emp_details where city="Chicago" or city="Austin";
+
+-- in operator (used to specify multiple conditions)
+select * from emp_details where city in ("Chicago","Austin");
+
+-- between operator (employees joined between these 2 dates will show)
+select * from emp_details where doj between "2000-01-01" and "2010-12-31";
+
+-- group by (to find total salary of Male and Female emloyees i.e. based on sex i.e. groupby sex)
+select sex,sum(salary) as total_salary from emp_details group by sex;
+
+-- sorting the table in terms of salary in ascending order
+select * from emp_details order by salary;
+select * from emp_details order by salary desc;         -- descending order
+
+-- operations using select
+select (30+20) as addition;      -- 50
+select (30-20) as subtract;      -- 10
+select (30*20) as multiply;      -- 600
+select (30/20) as divide;        -- 1.5000
+
+select length("India") as length_India;             -- to get length of India i.e. 5
+select repeat("ATUL ",10);                -- repeats @ 10 times
+select upper("atul") as upperName;        -- converts to uppercase
+select lower("ATUL") as lowerName;        -- converts to lowercase
+select curdate();         -- gives current date
+select day(curdate());    -- extracts day from current date
+select year(curdate());   -- extracts year from current date
+select month(curdate());  -- extracts month from current date
+select now();         -- returns current date & time
+
+# STRING FUNCTIONS
+select upper("India") as upperCase;   -- select ucase("India") as upperCase;
+select lower("India") as lowerCase;   -- select lcase("INDIA") as lowerCase;
+
+select length("My name is Shashank") as length;
+select character_length("My name is Shashank") as charLength;
+select length(12);           -- 2
+select character_length(12);  -- 2   or char_length()
+select character_length(name) as empNameLength from emp_details;      -- gives length of each employee's name
+-- select * from emp_details;
+select concat("India"," is ","in Asia.") as merged;
+
+-- Reverse fn() returns a string in reverse order
+select reverse("Shashank") as reversed;
+-- Replace fn() replaces strings
+select replace("Orange is a vegetable","vegetable","fruit") as replaced;    -- Orange is a fruit 
+select replace(123,1,4) as replaced;       -- 423(replaces first thing i.e. 1 with next given thing i.e. 4)
+-- Trim fn() , lefttrim(ltrim) and righttrim(rtrim)
+select trim("    India    ");        -- trims every spaces from left & right
+select ltrim("    India    ") as lefttrim;    -- trims spaces from left 
+select rtrim("    India    ") as righttrim;   -- trims spaces from right
+select length(ltrim("     India     ")) as lengthLeftTrim;      -- 10
+select length(rtrim("     India     ")) as lengthRightTrim;      -- 10
+
+-- Position fn() returns position of 1st occurence of substring in a string,if substring not found returns 0
+select position('fruit' in 'Orange is my fruit');      -- fruit position begins from 14
+select ascii('a');        -- 97
+select ascii('A');        -- 65
+select ascii(2);          -- 50
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
