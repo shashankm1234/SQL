@@ -1,0 +1,40 @@
+-> JOINS IN SQL 
+SQL Join statement is used to combine data or rows from two or more tables based on a common field between them.
+A JOIN clause is used to combine rows from two or more tables, based on a related column between them.
+MySQL JOINS are used with SELECT statement. It is used to retrieve data from multiple tables. 
+It is performed whenever you need to fetch records from two or more tables.
+
+Different types of Joins are as follows: 
+1. INNER JOIN
+2. LEFT JOIN
+3. RIGHT JOIN
+4. FULL JOIN
+5. NATURAL JOIN 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
